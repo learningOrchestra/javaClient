@@ -15,8 +15,8 @@ public class DatasetImplementation implements DatasetInterface {
     @Override
     public JsonObject insertDatasetSync(String datasetURI, String datasetName) {
         try {
-            Properties properties = new Properties();
-            properties.load(new FileInputStream("config.properties"));
+            Properties propertiess = new Properties();
+            propertiess.load(new FileInputStream("config.properties"));
 
             Map<String, String> args = new TreeMap<>();
             args.put("datasetURI", datasetURI);
@@ -33,7 +33,7 @@ public class DatasetImplementation implements DatasetInterface {
             if (jsonObj == null) throw new AssertionError();
             String result = jsonObj.get("result").getAsString();
 
-            String search = properties.getProperty("search_content");
+            String search = propertiess.getProperty("search_content");
 
             if (result.endsWith(search)) {
                 JsonObject jsonObjectAux = await(datasetName);
