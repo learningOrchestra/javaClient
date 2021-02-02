@@ -70,13 +70,14 @@ public class DatasetImplementation implements DatasetInterface {
     }
 
     @Override
-    public JsonObject updateDatasetSync(String datasetName) {
+    public JsonObject updateDatasetSync(String datasetURI, String datasetName) {
         try {
             JsonObject request = new JsonObject();
             request.addProperty("datasetName", datasetName);
+            request.addProperty("datasetURI", datasetURI);
 
             JsonObject jsonObj = NetworkCommunication.jsonRequest(
-                    "PATCH", "microservice_dataset", true, request);
+                    "PUT", "microservice_dataset", true, request);
 
             if (jsonObj == null) throw new AssertionError();
 
@@ -99,13 +100,14 @@ public class DatasetImplementation implements DatasetInterface {
     }
 
     @Override
-    public JsonObject updateDatasetAsync(String datasetName) {
+    public JsonObject updateDatasetAsync(String datasetURI, String datasetName) {
         try {
             JsonObject request = new JsonObject();
             request.addProperty("datasetName", datasetName);
+            request.addProperty("datasetURI", datasetURI);
 
             return NetworkCommunication.jsonRequest(
-                    "PATCH", "microservice_dataset", true, request);
+                    "PUT", "microservice_dataset", true, request);
 
         } catch (Exception exception) {
             // TODO Auto-generated catch block
