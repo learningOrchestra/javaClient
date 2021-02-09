@@ -117,7 +117,7 @@ public class DatasetImplementation implements DatasetInterface {
     }
 
     @Override
-    public JsonObject await(String datasetName) {
+    public JsonObject await(String datasetURL) {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("config.properties"));
@@ -129,7 +129,7 @@ public class DatasetImplementation implements DatasetInterface {
 
             return NetworkCommunication.confirmAsync(
                     address, microService, "microservice_dataset",
-                    datasetName, searchMetadata, null, sleep);
+                    datasetURL, searchMetadata, null, sleep);
 
         } catch (Exception exception) {
             // TODO Auto-generated catch block

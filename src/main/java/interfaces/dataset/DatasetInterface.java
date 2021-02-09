@@ -61,14 +61,14 @@ public interface DatasetInterface {
 
 
     /**
-     * @param datasetName is the dataset name used by the method insertDatasetAsync or by the method updateDatasetAsync
+     * @param datasetURL is the dataset URL returned by asynchronous method calls of Learning Orchestra API
      * @return a JSON object indicating if the dataset is inserted/updated correctly or a null result
      * @summary This method is responsible to lock the caller until a dataset is inserted or updated correctly into
      * Learning Orchestra
      * @see #insertDatasetAsync the method insertDatasetAsync because it must be called before this method call
      * @see #updateDatasetAsync the method updateDatasetAsync because it must be called before this method call
      */
-    JsonObject await(String datasetName);
+    JsonObject await(String datasetURL);
 
     /**
      * @param datasetName represents the dataset name
@@ -110,7 +110,7 @@ public interface DatasetInterface {
 
     /**
      * @param datasetName is the name of the dataset
-     * @return a page with the first 10 tuples or registers inside or an error if there is no such dataset.
+     * @return a page with the first 20 tuples or registers inside or an error if there is no such dataset.
      * @summary This method is responsible for retrieving the dataset content, precisely the first 20 tuples
      */
     JsonObject searchDatasetContent(String datasetName);

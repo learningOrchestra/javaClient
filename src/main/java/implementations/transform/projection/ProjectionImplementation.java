@@ -50,48 +50,7 @@ public class ProjectionImplementation implements ProjectionInterface {
 
 
     @Override
-    public JsonObject insertDatasetAttributeAsync(String datasetName, String attribute,
-                                                  String existingAttribute,
-                                                  Map<String, String> values, boolean newDataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject reduceDatasetAsync(String datasetName, int sizeReduction, boolean newDataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject enlargeDatasetAsync(String datasetName, int sizeEnlarge, boolean newDataset) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject joinDatasetsAsync(Enumeration<String> datasetNames, String datasetName,
-                                        boolean removeExistingDatasets) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject joinDatasetsAsync(String datasetNameOne, String datasetNameTwo,
-                                        Map<String, String> attributesAssociations,
-                                        String datasetName, boolean removeExistingDatasets) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject updateDatasetValuesAsync(String datasetName, String attribute,
-                                               Map<String, String> oldToNewValues) {
-        return null;
-    }
-
-    @Override
-    public JsonObject await(String datasetName) {
+    public JsonObject await(String datasetURL) {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("config.properties"));
@@ -104,7 +63,7 @@ public class ProjectionImplementation implements ProjectionInterface {
 
             return NetworkCommunication.confirmAsync(
                     address, microservice, "microservice_transform_projection",
-                    datasetName, searchMetadata, null, sleep);
+                    datasetURL, searchMetadata, null, sleep);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,34 +72,39 @@ public class ProjectionImplementation implements ProjectionInterface {
     }
 
     @Override
-    public JsonObject updateDatasetAttributesSync(String datasetName, String datasetOldName,
+    public JsonObject deleteProjectionSync(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject deleteProjectionAsync(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchAllProjections() {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchProjectionContent(String datasetName, int pageSize, int currentPage) {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchProjectionContent(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject removeDatasetAttributesSync(String datasetName, String datasetOldName,
                                                   Enumeration<String> attributes,
                                                   boolean newDataset) {
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream("config.properties"));
 
-            JsonObject request = new JsonObject();
-            request.addProperty("datasetName", datasetName);
-            request.addProperty("datasetOldName", datasetOldName);
-            JsonArray array = new JsonArray();
-            while (attributes.hasMoreElements())
-                array.add(attributes.nextElement());
+            JsonObject jsonObj = removeDatasetAttributesAsync(datasetName,datasetOldName,attributes,newDataset);
 
-            request.add("names", array);
-
-            JsonObject jsonObj;
-
-            if (newDataset)
-                jsonObj = NetworkCommunication.jsonRequest(
-                        "POST", "microservice_transform_projection",
-                        true, request);
-            else
-                jsonObj = NetworkCommunication.jsonRequest(
-                        "PATCH", "microservice_transform_projection",
-                        true, request);
-
-            if (jsonObj == null) throw new AssertionError();
             String result = jsonObj.get("result").getAsString();
 
             String search = properties.getProperty("search_content");
@@ -168,7 +132,7 @@ public class ProjectionImplementation implements ProjectionInterface {
     }
 
     @Override
-    public JsonObject updateDatasetAttributesAsync(String datasetName, String datasetOldName,
+    public JsonObject removeDatasetAttributesAsync(String datasetName, String datasetOldName,
                                                    Enumeration<String> attributes, boolean newDataset) {
         try {
 
@@ -202,5 +166,35 @@ public class ProjectionImplementation implements ProjectionInterface {
             exception.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public JsonObject insertDatasetAttributeAsync(String datasetName, String attribute, String existingAttribute, Map<String, String> values, boolean newDataset) {
+        return null;
+    }
+
+    @Override
+    public JsonObject reduceDatasetAsync(String datasetName, int sizeReduction, boolean newDataset) {
+        return null;
+    }
+
+    @Override
+    public JsonObject enlargeDatasetAsync(String datasetName, int sizeEnlarge, boolean newDataset) {
+        return null;
+    }
+
+    @Override
+    public JsonObject joinDatasetsAsync(Enumeration<String> datasetNames, String datasetName, boolean removeExistingDatasets) {
+        return null;
+    }
+
+    @Override
+    public JsonObject joinDatasetsAsync(String datasetNameOne, String datasetNameTwo, Map<String, String> attributesAssociations, String datasetName, boolean removeExistingDatasets) {
+        return null;
+    }
+
+    @Override
+    public JsonObject updateDatasetValuesAsync(String datasetName, String attribute, Map<String, String> oldToNewValues) {
+        return null;
     }
 }

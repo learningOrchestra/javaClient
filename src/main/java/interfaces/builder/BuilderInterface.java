@@ -5,26 +5,26 @@ import com.google.gson.JsonObject;
 public interface BuilderInterface {
     
     //nao tenho ideia dos args
-    JsonObject runSparkMlPipelineSync();
+    JsonObject runSparkMLSync();
 
-    JsonObject runSparkMlPipelineAsync();
+    JsonObject runSparkMLAsync();
 
     //nao tenho ideia dos args
-    JsonObject runTensorFlowPipelineSync();
+    JsonObject runTensorFlowSync();
 
-    JsonObject runTensorFlowPipelineAsync();
+    JsonObject runTensorFlowAsync();
 
-    JsonObject await(String asyncURL);
+    JsonObject await(String pipelineURL);
 
-    JsonObject searchAllModels();
+    JsonObject searchAllBuilders();
 
     //retornar os metadados
-    JsonObject searchModel(String modelName);
+    JsonObject searchBuilder(String builderName);
 
     //retorna os resultados do modelo
-    JsonObject searchModelPrediction(String modelName);
+    JsonObject searchBuilderPredictions(String builderName);
 
     //retorna os resultados das tuplas
-    JsonObject searchDataPredictions(String modelName, int pageSize, int currentPage);
+    JsonObject searchBuilderRegisterPredictions(String builderName, int pageSize, int currentPage);
 
 }
