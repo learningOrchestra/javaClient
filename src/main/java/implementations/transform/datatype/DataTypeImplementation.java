@@ -15,7 +15,7 @@ import interfaces.transform.datatype.DataTypeInterface;
 public class DataTypeImplementation implements DataTypeInterface {
 
     @Override
-    public JsonObject updateDatasetTypesAsync(String datasetName, Map<String, String> types) {
+    public JsonObject updateDatasetTypeAsync(String datasetName, Map<String, String> types) {
         JsonObject request = new JsonObject();
         request.addProperty("datasetName", datasetName);
         JsonArray array = new JsonArray();
@@ -31,20 +31,9 @@ public class DataTypeImplementation implements DataTypeInterface {
                 true, request);
     }
 
-    @Override
-    public JsonObject searchDatasetTypes(String datasetName) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
-    public JsonObject isUpdatable(String datasetName, String attribute, String newType) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public JsonObject awaitUpdateOperation(String datasetName) {
+    public JsonObject await(String datasetName) {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("config.properties"));
@@ -67,7 +56,32 @@ public class DataTypeImplementation implements DataTypeInterface {
     }
 
     @Override
-    public JsonObject updateDatasetTypesSync(String datasetName, Map<String, String> types) {
+    public JsonObject deleteDatasetTypeSync(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject deleteDatasetTypeAsync(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchAllDatasetTypes() {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchDatasetTypeContent(String datasetName, int pageSize, int currentPage) {
+        return null;
+    }
+
+    @Override
+    public JsonObject searchDatasetTypeContent(String datasetName) {
+        return null;
+    }
+
+    @Override
+    public JsonObject updateDatasetTypeSync(String datasetName, Map<String, String> types) {
         try {
 
             Properties properties = new Properties();
@@ -91,7 +105,7 @@ public class DataTypeImplementation implements DataTypeInterface {
             String search = properties.getProperty("search_content");
 
             if (result.endsWith(search)) {
-                JsonObject jsonObjectAux = awaitUpdateOperation(datasetName);
+                JsonObject jsonObjectAux = await(datasetName);
                 if (jsonObjectAux != null)
                     jsonObj = jsonObjectAux;
             }
